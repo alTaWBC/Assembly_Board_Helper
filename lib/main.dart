@@ -17,23 +17,17 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/Settings':
-            return MaterialPageRoute(
-                builder: (_) => Settings(),
-                settings: RouteSettings(name: "/Settings"));
+            return MaterialPageRoute(builder: (_) => Settings(), settings: RouteSettings(name: "/Settings"));
           case '/Vote':
-            return MaterialPageRoute(
-                builder: (_) => Vote(), settings: RouteSettings(name: "/Vote"));
+            return MaterialPageRoute(builder: (_) => Vote(), settings: RouteSettings(name: "/Vote"));
           case '/Results':
-            return MaterialPageRoute(
-                builder: (_) => Results(),
-                settings: RouteSettings(name: "/Results"));
+            return MaterialPageRoute(builder: (_) => Results(), settings: RouteSettings(name: "/Results"));
           case '/':
           default:
-            return MaterialPageRoute(
-                builder: (_) => Vote(), settings: RouteSettings(name: "/Vote"));
+            return MaterialPageRoute(builder: (_) => Vote(), settings: RouteSettings(name: "/Vote"));
         }
       },
-      initialRoute: '/',
+      initialRoute: '/Results',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

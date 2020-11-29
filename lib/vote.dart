@@ -78,7 +78,10 @@ class _VoteState extends State<Vote> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    var vote = {'vote': votingOptions[_votingValue]};
+                    var vote = {
+                      'vote': votingOptions[_votingValue],
+                      'name': names[_value],
+                    };
                     var voteCollection =
                         FirebaseFirestore.instance.collection('vote');
                     voteCollection.doc(names[_value]).get().then((snapshot) {
