@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:secret_voting/Admin/admin_pages.dart';
+import 'package:secret_voting/User/user_pages.dart';
 import 'package:secret_voting/probe.dart';
-import 'package:secret_voting/results.dart';
 import 'package:secret_voting/settings.dart';
 import 'package:secret_voting/vote.dart';
 
@@ -23,19 +24,16 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (_) => Settings(), settings: RouteSettings(name: "/Settings"));
           case '/Vote':
             return MaterialPageRoute(builder: (_) => Vote(), settings: RouteSettings(name: "/Vote"));
-          case '/Results':
-            return MaterialPageRoute(builder: (_) => Results(), settings: RouteSettings(name: "/Results"));
           case '/Probe':
             return MaterialPageRoute(builder: (_) => Probe(), settings: RouteSettings(name: "/Probe"));
           case '/Probing':
             return MaterialPageRoute(builder: (_) => Probing(), settings: RouteSettings(name: "/Probing"));
-
           case '/':
           default:
-            return MaterialPageRoute(builder: (_) => Vote(), settings: RouteSettings(name: "/"));
+            return MaterialPageRoute(builder: (_) => AdminPages(), settings: RouteSettings(name: "/"));
         }
       },
-      initialRoute: '/Probing',
+      initialRoute: '/',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

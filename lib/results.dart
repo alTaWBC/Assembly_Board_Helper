@@ -42,20 +42,7 @@ class _ResultsState extends State<Results> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      drawer: Drawer(
-        child: ListTile(
-          title: Text("Settings"),
-          leading: Icon(Icons.settings),
-          onTap: () {
-            Navigator.of(context).pushNamed("/Settings");
-          },
-        ),
-      ),
-      appBar: AppBar(
-        title: Text("Results"),
-      ),
-      body: StreamBuilder(
+    return StreamBuilder(
         stream: FirebaseFirestore.instance.collection('vote_options').snapshots(),
         builder: (context, votingOptionsSnapshot) {
           if (!votingOptionsSnapshot.hasData) return CircularProgressIndicator();
@@ -121,7 +108,7 @@ class _ResultsState extends State<Results> {
                 );
               });
         },
-      ),
+      // ),
     );
   }
 }
