@@ -9,17 +9,12 @@ class Probe extends StatefulWidget {
 }
 
 class _ProbeState extends State<Probe> {
-  void clearProbe() {
-    FirebaseFirestore.instance.collection('probe').getDocuments().then((snapshot) {
-      for (DocumentSnapshot doc in snapshot.documents) {
-        doc.reference.delete();
-      }
-    });
-  }
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: Text("Probe"),
         ),
@@ -54,12 +49,6 @@ class _ProbeState extends State<Probe> {
                       color: Colors.red,
                     ),
                   ),
-                  RaisedButton(
-                    onPressed: () {
-                      clearProbe();
-                    },
-                    child: Text('Reset Probing'),
-                  )
                 ],
               ),
             );
@@ -67,3 +56,5 @@ class _ProbeState extends State<Probe> {
         ));
   }
 }
+
+

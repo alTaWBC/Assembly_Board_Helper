@@ -66,7 +66,7 @@ class _SettingsState extends State<Settings> {
                             keyboardType: TextInputType.multiline,
                             controller: namesController,
                             maxLines: null,
-                            decoration: InputDecoration(labelText: "Nome das Full Members", hintText: "Separar por enter"),
+                            decoration: InputDecoration(labelText: "Nome dos Full Members", hintText: "Separar por enter"),
                           ),
                         ),
                         Container(
