@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:secret_voting/Admin/admin_pages.dart';
 import 'package:secret_voting/User/user_pages.dart';
-import 'package:secret_voting/probe.dart';
-import 'package:secret_voting/settings.dart';
-import 'package:secret_voting/vote.dart';
+import 'package:secret_voting/User/probe.dart';
+import 'package:secret_voting/Admin/settings.dart';
+import 'package:secret_voting/User/vote.dart';
 
 import 'Admin/probing.dart';
 

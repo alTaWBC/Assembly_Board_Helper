@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:secret_voting/Admin/fingers.dart';
 import 'package:secret_voting/Admin/probing.dart';
-import 'package:secret_voting/probe.dart';
-import 'package:secret_voting/settings.dart';
-import 'package:secret_voting/vote.dart';
+import 'package:secret_voting/User/probe.dart';
+import 'package:secret_voting/Admin/settings.dart';
+import 'package:secret_voting/User/vote.dart';
 
 class AdminPages extends StatefulWidget {
   AdminPages({Key key}) : super(key: key);
@@ -39,7 +40,7 @@ class _AdminPagesState extends State<AdminPages> {
         ),
         body: TabBarView(
           children: [
-            Container(),
+            Fingers(),
             Probing(),
             Settings(),
           ],

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:secret_voting/results.dart';
+import 'package:secret_voting/Admin/results.dart';
 
 class Settings extends StatefulWidget {
   Settings({Key key}) : super(key: key);

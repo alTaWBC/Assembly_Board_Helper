@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:secret_voting/probe.dart';
-import 'package:secret_voting/vote.dart';
+import 'package:secret_voting/User/finger.dart';
+import 'package:secret_voting/User/probe.dart';
+import 'package:secret_voting/User/vote.dart';
 
 class UserPages extends StatefulWidget {
   UserPages({Key key}) : super(key: key);
@@ -37,7 +38,7 @@ class _UserPagesState extends State<UserPages> {
         ),
         body: TabBarView(
           children: [
-            Container(),
+            Finger(),
             Probe(),
             Vote(),
           ],
