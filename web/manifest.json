@@ -1,7 +1,7 @@
 {
-    "name": "secret_voting",
-    "short_name": "secret_voting",
-    "start_url": ".",
+    "name": "Mesa da Assembleia Geral",
+    "short_name": "MAG",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
