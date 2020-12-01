@@ -41,7 +41,7 @@ class _FingersState extends State<Fingers> {
               fullList.putIfAbsent(priority, () => new List<String>());
               idList.putIfAbsent(priority, () => new List<String>());
               priorityList.add(priority);
-              _fingerPriority.text += priority + ", ";
+              _fingerPriority.text += priority + " ";
             }
 
             for (var document in snapshot.data.documents) {
@@ -88,18 +88,18 @@ class _FingersState extends State<Fingers> {
                         child: TextFormField(
                           controller: _fingerPriority,
                           decoration: InputDecoration(
-                              labelText: 'Dedos por prioridade (Maior prioridade para Menor Prioridade)', hintText: 'Separar por vírgulas'),
+                              labelText: 'Dedos por prioridade (Maior prioridade para Menor Prioridade)', hintText: 'Separar por espaços'),
                         ),
                       ),
                       RaisedButton(
                         child: Text('Mudar Prioridades'),
                         onPressed: () {
-                          var priorityTemp = _fingerPriority.text.split(', ');
-                          priorityTemp.remove('');
+                          var priorityTemp = _fingerPriority.text.trim().split(' ');
+                          while (priorityTemp.contains(' ')) priorityTemp.remove(' ');
                           FirebaseFirestore.instance
                               .collection('finger_priority')
                               .doc(prioritySnapshot.data.documents[0].documentID)
-                              .set({'priority': priorityTemp.map((e) => e.contains(',') ? e.substring(0, e.length - 1) : e)});
+                              .set({'priority': priorityTemp});
                         },
                       ),
                     ],

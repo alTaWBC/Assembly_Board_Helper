@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:secret_voting/Admin/admin_pages.dart';
 import 'package:secret_voting/User/user_pages.dart';
-import 'package:secret_voting/User/probe.dart';
-import 'package:secret_voting/Admin/settings.dart';
-import 'package:secret_voting/User/vote.dart';
-
-import 'Admin/probing.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,23 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      shortcuts: Map.of(WidgetsApp.defaultShortcuts)..remove(LogicalKeyboardKey.arrowLeft)..remove(LogicalKeyboardKey.arrowRight),
       title: 'Flutter Demo',
       onGenerateRoute: (settings) {
         switch (settings.name) {
-          case '/Settings':
-            return MaterialPageRoute(builder: (_) => Settings(), settings: RouteSettings(name: "/Settings"));
-          case '/Vote':
-            return MaterialPageRoute(builder: (_) => Vote(), settings: RouteSettings(name: "/Vote"));
-          case '/Probe':
-            return MaterialPageRoute(builder: (_) => Probe(), settings: RouteSettings(name: "/Probe"));
-          case '/Probing':
-            return MaterialPageRoute(builder: (_) => Probing(), settings: RouteSettings(name: "/Probing"));
+          case '/Admin':
+            return MaterialPageRoute(builder: (_) => AdminPages(), settings: RouteSettings(name: "/"));
+          case '/User':
           case '/':
           default:
-            return MaterialPageRoute(builder: (_) => AdminPages(), settings: RouteSettings(name: "/"));
+            return MaterialPageRoute(builder: (_) => UserPages(), settings: RouteSettings(name: "/User"));
         }
       },
-      initialRoute: '/',
+      initialRoute: '/Admin',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
