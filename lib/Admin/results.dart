@@ -9,7 +9,10 @@ class Results extends StatefulWidget {
   _ResultsState createState() => _ResultsState();
 }
 
-class _ResultsState extends State<Results> {
+class _ResultsState extends State<Results> with AutomaticKeepAliveClientMixin<Results> {
+  @override
+  bool get wantKeepAlive => true;
+
   List missing = [];
   List voters = [];
   List fullList = [];
@@ -43,71 +46,71 @@ class _ResultsState extends State<Results> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('vote_options').snapshots(),
-        builder: (context, votingOptionsSnapshot) {
-          if (!votingOptionsSnapshot.hasData) return CircularProgressIndicator();
+      stream: FirebaseFirestore.instance.collection('vote_options').snapshots(),
+      builder: (context, votingOptionsSnapshot) {
+        if (!votingOptionsSnapshot.hasData) return CircularProgressIndicator();
 
-          return StreamBuilder(
-              stream: FirebaseFirestore.instance.collection('vote').snapshots(),
-              builder: (context, votesSnapshot) {
-                if (!votesSnapshot.hasData) return CircularProgressIndicator();
-                retrieveFirestoreSnapshotData(votingOptionsSnapshot, votesSnapshot);
-                return Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          Text(voters.length == 1
-                              ? "Votou ${voters.length} Full em ${fullList.length}"
-                              : "Votaram ${voters.length} Fulls em ${fullList.length}"),
-                          SizedBox(height: 20),
-                          missing.length > 0
-                              ? Column(
-                                  children: [
-                                    Text(
-                                      "Ainda falta votar:",
-                                      style: TextStyle(fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 20),
-                                    ...(missing.map((e) => Text(e)).toList()),
-                                  ],
-                                )
-                              : Container(),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "Resultado da Votação",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          missing.length != 0
-                              ? Text("O resultado da votação só irá aparecer quando todos os Fulls votarem")
-                              : Container(
-                                  width: size.width * .35,
-                                  height: size.height * .3,
-                                  child: charts.BarChart([
-                                    new charts.Series<Option, String>(
-                                      id: 'Votes',
-                                      colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-                                      domainFn: (option, _) => option.name,
-                                      measureFn: (option, _) => option.count,
-                                      data: results,
-                                    )
-                                  ]),
-                                ),
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              });
-        },
+        return StreamBuilder(
+            stream: FirebaseFirestore.instance.collection('vote').snapshots(),
+            builder: (context, votesSnapshot) {
+              if (!votesSnapshot.hasData) return CircularProgressIndicator();
+              retrieveFirestoreSnapshotData(votingOptionsSnapshot, votesSnapshot);
+              return Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text(voters.length == 1
+                            ? "Votou ${voters.length} Full em ${fullList.length}"
+                            : "Votaram ${voters.length} Fulls em ${fullList.length}"),
+                        SizedBox(height: 20),
+                        missing.length > 0
+                            ? Column(
+                                children: [
+                                  Text(
+                                    "Ainda falta votar:",
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(height: 20),
+                                  ...(missing.map((e) => Text(e)).toList()),
+                                ],
+                              )
+                            : Container(),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          "Resultado da Votação",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        missing.length != 0
+                            ? Text("O resultado da votação só irá aparecer quando todos os Fulls votarem")
+                            : Container(
+                                width: size.width * .35,
+                                height: size.height * .3,
+                                child: charts.BarChart([
+                                  new charts.Series<Option, String>(
+                                    id: 'Votes',
+                                    colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+                                    domainFn: (option, _) => option.name,
+                                    measureFn: (option, _) => option.count,
+                                    data: results,
+                                  )
+                                ]),
+                              ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            });
+      },
       // ),
     );
   }

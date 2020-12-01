@@ -4,7 +4,9 @@ import 'package:secret_voting/User/probe.dart';
 import 'package:secret_voting/User/vote.dart';
 
 class UserPages extends StatefulWidget {
-  UserPages({Key key}) : super(key: key);
+  final String parameter;
+
+  UserPages(this.parameter);
 
   @override
   _UserPagesState createState() => _UserPagesState();
@@ -17,6 +19,7 @@ class _UserPagesState extends State<UserPages> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           flexibleSpace: SafeArea(
             child: TabBar(
               tabs: [
@@ -38,9 +41,9 @@ class _UserPagesState extends State<UserPages> {
         ),
         body: TabBarView(
           children: [
-            Finger(),
+            Finger(widget.parameter),
             Probe(),
-            Vote(),
+            Vote(widget.parameter),
           ],
         ),
       ),

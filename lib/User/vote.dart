@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Vote extends StatefulWidget {
-  const Vote({Key key}) : super(key: key);
+  final String parameter;
+
+  const Vote(this.parameter, {Key key}) : super(key: key);
 
   @override
   _VoteState createState() => _VoteState();
@@ -17,6 +19,7 @@ class _VoteState extends State<Vote> with AutomaticKeepAliveClientMixin<Vote> {
   List votingOptions = [];
   int _value = 0;
   int _votingValue = 0;
+  bool initialChange = true;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +30,10 @@ class _VoteState extends State<Vote> with AutomaticKeepAliveClientMixin<Vote> {
 
         names = snapshot.data.documents[0]['names'];
         votingOptions = snapshot.data.documents[0]['options'];
+        if (initialChange) {
+          _value = names.indexOf(widget.parameter);
+          initialChange = false;
+        }
 
         return Form(
           key: _formKey,

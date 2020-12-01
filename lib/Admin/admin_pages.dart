@@ -19,6 +19,7 @@ class _AdminPagesState extends State<AdminPages> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           flexibleSpace: SafeArea(
             child: TabBar(
               tabs: [
