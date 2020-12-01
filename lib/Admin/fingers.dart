@@ -45,6 +45,7 @@ class _FingersState extends State<Fingers> {
             }
 
             for (var document in snapshot.data.documents) {
+              if (!fullList.keys.contains(document['finger'])) continue;
               fullList[document['finger']].add(document['name']);
               idList[document['finger']].add(document.documentID);
             }
